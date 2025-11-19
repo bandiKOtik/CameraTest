@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CameraScripts
 {
-    public class CameraSwitch : MonoBehaviour
+    public class CameraSwap : MonoBehaviour
     {
         [SerializeField] private List<CinemachineVirtualCamera> _virtualCamerasList;
 

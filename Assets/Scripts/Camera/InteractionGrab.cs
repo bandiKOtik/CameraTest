@@ -1,23 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CameraScripts
 {
     public class InteractionGrab : IInteractType
     {
-        private Transform _selectedObject;
-        private Vector3 _moveToPosition;
+        private Transform _selectedTransform;
+        private Vector3 _newObjectPosition;
         private float _distanceFromCamera = 10f;
+        private float speed = 5f;
 
         public InteractionGrab(Transform objectTransform)
         {
-            _selectedObject = objectTransform;
+            _selectedTransform = objectTransform;
         }
 
         public void Execute()
         {
-            _moveToPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            _selectedObject.Translate(_moveToPosition * Time.deltaTime, Space.World);
+            _newObjectPosition = ray.origin + ray.direction * _distanceFromCamera;
+
+            float lerpedSpeed = Time.deltaTime * speed;
+
+            _selectedTransform.position = Vector3.Lerp(_selectedTransform.position, _newObjectPosition, lerpedSpeed);
         }
     }
 }

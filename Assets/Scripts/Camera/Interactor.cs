@@ -5,27 +5,52 @@ namespace CameraScripts
     public class Interactor : MonoBehaviour
     {
         [SerializeField] private LayerMask interactableLayer;
-        private IInteractType currentInteractType;
-        private KeyCode grabInteractKey = KeyCode.Mouse0;
-        private KeyCode explodeInteractKey = KeyCode.Mouse1;
+        private IInteractType selectedInteractionType;
+        private Transform _grabbedTransform;
+        private Rigidbody _grabbedRigidbody;
+        private KeyCode interactionGrabKey = KeyCode.Mouse0;
+        private KeyCode interactionExplodeKey = KeyCode.Mouse1;
 
         private void Update()
         {
-            if (Input.GetKey(grabInteractKey))
+            if (Input.GetKey(interactionGrabKey))
             {
                 RaycastHit rayHit = GetRaycastHit(interactableLayer);
 
-                if (rayHit.transform == null)
+                if (rayHit.transform == null && _grabbedTransform == null)
                     return;
 
-                currentInteractType = new InteractionGrab(rayHit.transform);
-                currentInteractType.Execute();
+                if (_grabbedTransform == null)
+                {
+                    Debug.Log("Grab");
+                    _grabbedTransform = rayHit.transform;
+                    selectedInteractionType = new InteractionGrab(_grabbedTransform);
+
+                    if (rayHit.rigidbody != null)
+                    {
+                        Debug.Log("Dont use grav");
+                        _grabbedRigidbody = rayHit.rigidbody;
+                        _grabbedRigidbody.isKinematic = true;
+                    }
+                }
+
+                Debug.Log(_grabbedTransform);
+                selectedInteractionType.Execute();
             }
 
-            if (Input.GetKeyDown(explodeInteractKey))
+            if (Input.GetKeyUp(interactionGrabKey) && _grabbedTransform != null)
             {
-                currentInteractType = new InteractionExplode(GetRaycastHit());
-                currentInteractType.Execute();
+                selectedInteractionType = null;
+                _grabbedTransform = null;
+
+                if (_grabbedRigidbody != null)
+                    _grabbedRigidbody.isKinematic = false;
+            }
+
+            if (Input.GetKeyDown(interactionExplodeKey))
+            {
+                selectedInteractionType = new InteractionExplode(GetRaycastHit());
+                selectedInteractionType.Execute();
             }
         }
 
