@@ -6,12 +6,19 @@ namespace CameraScripts
     {
         [SerializeField] private LayerMask interactableLayer;
         private IInteractType selectedInteractionType;
+
         private Transform _grabbedTransform;
         private Rigidbody _grabbedRigidbody;
+
         private KeyCode interactionGrabKey = KeyCode.Mouse0;
         private KeyCode interactionExplodeKey = KeyCode.Mouse1;
 
         private void Update()
+        {
+            GetInput();
+        }
+
+        private void GetInput()
         {
             if (Input.GetKey(interactionGrabKey))
             {

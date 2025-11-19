@@ -7,6 +7,7 @@ namespace CameraScripts
         private float _explosionRadius = 10f;
         private float _explosionStrength = 25f;
         private RaycastHit _hitPoint;
+
         public InteractionExplode(RaycastHit hit)
         {
             _hitPoint = hit;
