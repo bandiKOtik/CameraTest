@@ -20,9 +20,9 @@ namespace CameraScripts
             Vector3 objectPosition = _selectedObjectTransform.position;
             Vector3 newObjectPosition = ray.origin + ray.direction * _distanceFromCamera;
 
-            float lerpedSpeed = Time.deltaTime * speed;
+            float smoothedSpeed = Time.deltaTime * speed;
 
-            objectPosition = Vector3.Lerp(objectPosition, newObjectPosition, lerpedSpeed);
+            objectPosition = Vector3.MoveTowards(objectPosition, newObjectPosition, smoothedSpeed);
         }
     }
 }
