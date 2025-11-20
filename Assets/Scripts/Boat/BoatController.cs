@@ -23,19 +23,23 @@ namespace BoatScripts
         private void MovementControl()
         {
             if (Input.GetKey(_leftMoveKey))
-                _boatTransform.rotation = LerpedRotation(-Vector3.up);
+            {
+                RotateBoat(-Vector3.up);
+            }
 
             if (Input.GetKey(_rightMoveKey))
-                _boatTransform.rotation = LerpedRotation(Vector3.up);
+            {
+                RotateBoat(Vector3.up);
+            }
         }
 
-        private Quaternion LerpedRotation(Vector3 offset)
+        private void RotateBoat(Vector3 offset)
         {
             Quaternion rotationWithOffset = _boatTransform.rotation * Quaternion.Euler(offset);
 
-            float lerpedSpeed = Time.deltaTime * _rotationSpeed;
+            float smoothedSpeed = Time.deltaTime * _rotationSpeed;
 
-            return Quaternion.Lerp(_boatTransform.rotation, rotationWithOffset, lerpedSpeed);
+            _boatTransform.rotation = Quaternion.RotateTowards(_boatTransform.rotation, rotationWithOffset, smoothedSpeed);
         }
     }
 }
