@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace BoatScripts
         [SerializeField] private float _timeBeforeNewRotation = 15f;
 
         private Transform _windTransform;
-        private Quaternion _newDirection;
+        public Quaternion CurrentDirection { get; private set; }
         private bool _isRotating;
         private float _timer;
 
@@ -19,9 +18,9 @@ namespace BoatScripts
         {
             _windTransform = GetComponent<Transform>();
 
-            _newDirection = Quaternion.Euler(GetNewDirection());
+            CurrentDirection = Quaternion.Euler(GetNewDirection());
 
-            _windTransform.rotation = _newDirection;
+            _windTransform.rotation = CurrentDirection;
         }
 
         private void Update()
@@ -32,13 +31,13 @@ namespace BoatScripts
                 {
                     if (_isRotating == false)
                     {
-                        _newDirection = Quaternion.Euler(GetNewDirection());
+                        CurrentDirection = Quaternion.Euler(GetNewDirection());
                         _isRotating = true;
                     }
 
-                    while (_windTransform.rotation != _newDirection)
+                    while (_windTransform.rotation != CurrentDirection)
                     {
-                        SmoothRotation(_newDirection);
+                        SmoothRotation(CurrentDirection);
                         return;
                     }
 
