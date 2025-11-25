@@ -20,7 +20,7 @@ namespace CameraScripts
 
             float smoothedSpeed = Time.deltaTime * speed;
 
-            _selectedObjectTransform.position = Vector3.MoveTowards(_selectedObjectTransform.position, newObjectPosition, smoothedSpeed);
+            _selectedObjectTransform.position = Vector3.Lerp(_selectedObjectTransform.position, newObjectPosition, smoothedSpeed);
         }
     }
 }

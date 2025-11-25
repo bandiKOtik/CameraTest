@@ -29,19 +29,16 @@ namespace CameraScripts
 
                 if (_grabbedTransform == null)
                 {
-                    Debug.Log("Grab");
                     _grabbedTransform = rayHit.transform;
                     selectedInteractionType = new InteractionGrab(_grabbedTransform);
 
                     if (rayHit.rigidbody != null)
                     {
-                        Debug.Log("Dont use grav");
                         _grabbedRigidbody = rayHit.rigidbody;
-                        _grabbedRigidbody.isKinematic = true;
+                        _grabbedRigidbody.isKinematic = true; 
                     }
                 }
 
-                Debug.Log(_grabbedTransform);
                 selectedInteractionType.Execute();
             }
 

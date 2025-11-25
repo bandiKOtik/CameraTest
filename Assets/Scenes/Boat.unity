@@ -154,7 +154,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 797307381}
+  m_Father: {fileID: 1623566402}
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!65 &213500365
 BoxCollider:
@@ -259,7 +259,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 2, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 797307381}
+  m_Father: {fileID: 1623566402}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!65 &402017050
 BoxCollider:
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f67de96507f1c498b5c43428222abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useTimer: 1
+  _useTimer: 0
   _rotationSpeed: 2000
   _timeBeforeNewRotation: 10
 --- !u!1 &718993085
@@ -5502,6 +5502,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 797307381}
+  - {fileID: 1623566402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &788716766
@@ -5516,9 +5517,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5cd4779df4e384d8e9cb8b7f94e8a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boatTransform: {fileID: 788716765}
+  _sailTransform: {fileID: 1623566402}
   _wind: {fileID: 710794199}
-  _sailAngle: 90
+  _sailMaxAngle: 90
   _maxForwardSpeed: 5
+  _maxSailAngle: 60
 --- !u!1 &797307380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,7 +5533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 797307381}
   m_Layer: 0
-  m_Name: Mesh
+  m_Name: Mast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5550,9 +5554,6 @@ Transform:
   m_Children:
   - {fileID: 2073076082}
   - {fileID: 1302015955}
-  - {fileID: 402017049}
-  - {fileID: 213500364}
-  - {fileID: 845240905}
   m_Father: {fileID: 788716765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845240904
@@ -5587,7 +5588,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 797307381}
+  m_Father: {fileID: 1623566402}
   m_LocalEulerAnglesHint: {x: 0, y: -15, z: 0}
 --- !u!65 &845240906
 BoxCollider:
@@ -5870,6 +5871,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302015954}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1623566401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623566402}
+  m_Layer: 0
+  m_Name: Sail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1623566402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623566401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 402017049}
+  - {fileID: 213500364}
+  - {fileID: 845240905}
+  m_Father: {fileID: 788716765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882848449
 GameObject:
   m_ObjectHideFlags: 0
